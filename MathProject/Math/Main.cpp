@@ -1,60 +1,4 @@
-#include <iostream>
-
-class rsVector2
-{
-public:
-	rsVector2():x(0.0f),y(0.0f){}
-	rsVector2(float _x, float _y):x(_x),y(_y){}
-	~rsVector2(){}
-
-	void SetValue(float _x, float _y){x=_x; y=_y;}
-
-	rsVector2 operator+ (const rsVector2& _vector2) const;
-	rsVector2 operator- (const rsVector2& _vector2) const;
-	friend std::ostream& operator <<(std::ostream& o, const rsVector2& _vector2);
-
-	rsVector2 operator* (float scalar);
-	friend rsVector2 operator* (float scalar, const rsVector2& _vector2); 
-
-	rsVector2 operator*= (float scalar);
-
-public:
-	float x,y;
-};
-
-rsVector2 rsVector2::operator+ (const rsVector2& _vector2) const
-{
-	return rsVector2(x + _vector2.x, y + _vector2.y);
-}
-
-rsVector2 rsVector2::operator- (const rsVector2& _vector2) const
-{
-	return rsVector2(x - _vector2.x, y - _vector2.y);
-}
-
-std::ostream& operator <<(std::ostream& _ostream, const rsVector2& _vector2)
-{
-	return _ostream<<"("<<_vector2.x<<","<<_vector2.y<<")";
-}
-
-rsVector2 rsVector2::operator* (float scalar)
-{
-	return rsVector2(scalar * x, scalar * y);
-}
-
-rsVector2 operator* (float scalar, const rsVector2& _vector2)
-{
-	return rsVector2(scalar * _vector2.x, scalar * _vector2.y);
-}
-
-rsVector2 rsVector2::operator*= (float scalar)
-{
-	x *= scalar;
-	y *= scalar;
-
-	return *this;
-}
-
+#include "Vector.h"
 
 int main()
 {
@@ -90,6 +34,8 @@ int main()
 
 				std::cout<<"vector1=("<<vector1.x<<","<<vector1.y<<")입니다."<<std::endl;
 				std::cout<<"vector2=("<<vector2.x<<","<<vector2.y<<")입니다."<<std::endl;
+				std::cout<<"vector1의 길이는 "<< vector1.Length() <<std::endl;
+				std::cout<<"vector2의 길이는 "<< vector2.Length() <<std::endl;
 				std::cout<<"vector1 + vector2 ="<< vector1 + vector2 <<std::endl;
 				std::cout<<"vector2 + vector1 ="<< vector2 + vector1 <<std::endl;
 				std::cout<<"vector1 - vector2 ="<< vector1 - vector2 <<std::endl;
@@ -98,6 +44,10 @@ int main()
 				std::cout<<"(2+3)(vector1) ="<< (2+3) * vector1 <<std::endl;
 				std::cout<<"2(vector1 + vector2) ="<< 2 * (vector1 + vector2) <<std::endl;
 				std::cout<<"vector1*=vector2 ="<< (vector1*=7) <<std::endl;
+				std::cout<<"vector1의 정규화는 Normalize(vector1)="<< vector1.Normalize() <<std::endl;
+				std::cout<<"vector1의 길이는 "<< vector1.Length() <<std::endl;
+				std::cout<<"vector1와 vector2의 내적은 "<< vector1.Dot(vector2) <<std::endl;
+				std::cout<<"vector1와 vector2의 수직 내적은 "<< vector2.PrepDot(vector2) <<std::endl;
 			}
 			break;
 		default:

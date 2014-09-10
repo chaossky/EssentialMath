@@ -41,3 +41,6 @@ Debug/
 Bin/
 
 #제외할 화일
+MathProject/MathProject.opensdf
+MathProject/MathProject.sdf
+.sdf
