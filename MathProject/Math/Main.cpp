@@ -1,10 +1,12 @@
-#include "Vector.h"
+#include "vector.h"
+#include "matrix.h"
 
 int main()
 {
 	enum EDATA_TYPE
 	{
 		eVector2 = 1,
+		eMatrix33,
 		eMax
 	};
 
@@ -14,6 +16,7 @@ int main()
 	{
 		std::cout<<"\n테스트할 자료형을 선택하세요."<<std::endl;
 		std::cout<<"1 -> 2차원벡터(Vector2D)"<<std::endl;
+		std::cout<<"2 -> 3X3 행렬(Matrix33)"<<std::endl;
 		std::cout<<"0 -> 종료"<<std::endl;
 		std::cin>>UseType;
 
@@ -48,8 +51,15 @@ int main()
 				std::cout<<"vector1의 길이는 "<< vector1.Length() <<std::endl;
 				std::cout<<"vector1와 vector2의 내적은 "<< vector1.Dot(vector2) <<std::endl;
 				std::cout<<"vector1와 vector2의 수직 내적은 "<< vector2.PrepDot(vector2) <<std::endl;
-			}
-			break;
+			}break;
+		case eMatrix33:
+			{
+				std::cout<<"\n2.3X3 행렬(Matrix33) 선택"<<std::endl;
+
+				rsMatrix33 matrix1;
+				rsMatrix33 matrix2(matrix1);
+			}break;
+
 		default:
 			{
 				std::cout<<"\n잘못된 입력입니다.\n"<<std::endl;
