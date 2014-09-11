@@ -81,6 +81,7 @@ int main()
 				std::cout<<"vector1의 정규화는 Normalize(vector1)="<< vector1.Normalize() <<std::endl;
 				std::cout<<"vector1의 길이는 "<< vector1.Length() <<std::endl;
 				std::cout<<"vector1와 vector2의 내적은 "<< vector1.Dot(vector2) <<std::endl;
+				std::cout<<"vector1와 vector2의 외적은 "<< vector1.Cross(vector2) <<std::endl;
 			}break;
 		case eVector4:
 			{
