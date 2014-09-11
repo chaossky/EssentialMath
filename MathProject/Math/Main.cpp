@@ -57,7 +57,27 @@ int main()
 				std::cout<<"\n2.3X3 행렬(Matrix33) 선택"<<std::endl;
 
 				rsMatrix33 matrix1;
-				rsMatrix33 matrix2(matrix1);
+				for(int i = 0; i < 9; i++)
+				{
+					matrix1.element[i] = 1.0f * i;
+				}
+				
+				rsMatrix33 matrix2;
+				matrix2 = matrix1;
+
+				std::cout<<"matrix1="<<matrix1<<std::endl;
+				std::cout<<"matrix2="<<matrix1<<std::endl;
+				matrix1.SetElement(9.0f, 1, 2);
+				std::cout<<"matrix1의 1행 2열 값을 9로 변경하면,"<<matrix1<<std::endl;
+				std::cout<<"matrix1 - matrix2 = "<<matrix1 - matrix2<<std::endl;
+				matrix1 -= matrix2;
+				std::cout<<"matrix1 -= matrix2 한 후 matrix1 = "<<matrix1<<std::endl;
+				std::cout<<"-(matrix1) = "<<-matrix1<<std::endl;
+				std::cout<<"matrix1의 trace ="<<matrix1.trace()<<std::endl;
+				matrix1.Identity();
+				std::cout<<"matrix1를 단위행렬로 만들면 matrix1 ="<<matrix1<<std::endl;
+				std::cout<<"5 * matrix1 = "<< 5 * matrix1 <<std::endl;
+				std::cout<<"matrix1 * matrix2 = "<< matrix1 * matrix2 <<std::endl;
 			}break;
 
 		default:
