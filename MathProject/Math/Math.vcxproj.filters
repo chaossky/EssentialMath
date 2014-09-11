@@ -3,9 +3,13 @@
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="vector.cpp" />
+    <ClCompile Include="matrix.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="vector.h" />
     <ClInclude Include="matrix.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\History.txt" />
   </ItemGroup>
 </Project>
