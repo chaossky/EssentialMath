@@ -121,7 +121,7 @@ int main()
 				matrix2 = matrix1;
 
 				std::cout<<"matrix1="<<matrix1<<std::endl;
-				std::cout<<"matrix2="<<matrix1<<std::endl;
+				std::cout<<"matrix2="<<matrix2<<std::endl;
 				matrix1.SetElement(9.0f, 1, 2);
 				std::cout<<"matrix1의 1행 2열 값을 9로 변경하면,"<<matrix1<<std::endl;
 				std::cout<<"matrix1 - matrix2 = "<<matrix1 - matrix2<<std::endl;
@@ -139,6 +139,25 @@ int main()
 				rsVector3 vector1;
 				vector1.SetValue(10.0f, 20.0f, 30.0f);
 				std::cout<<"vector1 * matrix2 = "<< vector1 * matrix2 <<std::endl;
+				std::cout<<"matrix2 * vector1 = "<< matrix2 * vector1 <<std::endl;
+
+				rsMatrix33 matrix3;
+				matrix3.element[0] = 12.0f;
+				matrix3.element[1] = 4.0f;
+				matrix3.element[2] = 5.0f;
+				matrix3.element[3] = 15.0f;
+				matrix3.element[4] = 25.0f;
+				matrix3.element[5] = 3.0f;
+				matrix3.element[6] = 15.0f;
+				matrix3.element[7] = 8.0f;
+				matrix3.element[8] = 15.0f;
+
+				std::cout<<"matrix3="<<matrix3<<std::endl;
+				rsMatrix33 inverse = matrix3.Inverse();
+				std::cout<<"matrix3의 역행렬 = "<<inverse<<std::endl;
+				std::cout<<"matrix3 * matrix3의 역행렬은 "<<matrix3 * inverse <<std::endl;
+
+
 
 			}break;
 		case eMatrix44:

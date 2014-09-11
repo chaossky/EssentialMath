@@ -156,6 +156,16 @@ rsMatrix33 rsMatrix33::operator*( const rsMatrix33& _matrix ) const
 							element[cols + 6] * _matrix.element[rows + 2];
 	}
 
+	//matrix.element[0] = element[0]*_matrix.element[0] + element[3]*_matrix.element[1] + element[6]*_matrix.element[2];
+ //   matrix.element[1] = element[1]*_matrix.element[0] + element[4]*_matrix.element[1] + element[7]*_matrix.element[2];
+ //   matrix.element[2] = element[2]*_matrix.element[0] + element[5]*_matrix.element[1] + element[8]*_matrix.element[2];
+ //   matrix.element[3] = element[0]*_matrix.element[3] + element[3]*_matrix.element[4] + element[6]*_matrix.element[5];
+ //   matrix.element[4] = element[1]*_matrix.element[3] + element[4]*_matrix.element[4] + element[7]*_matrix.element[5];
+ //   matrix.element[5] = element[2]*_matrix.element[3] + element[5]*_matrix.element[4] + element[8]*_matrix.element[5];
+ //   matrix.element[6] = element[0]*_matrix.element[6] + element[3]*_matrix.element[7] + element[6]*_matrix.element[8];
+ //   matrix.element[7] = element[1]*_matrix.element[6] + element[4]*_matrix.element[7] + element[7]*_matrix.element[8];
+ //   matrix.element[8] = element[2]*_matrix.element[6] + element[5]*_matrix.element[7] + element[8]*_matrix.element[8];
+
 	return matrix;
 }
 
@@ -224,3 +234,56 @@ void rsMatrix33::Identity()
 	element[7] = 0.0f;
 	element[8] = 1.0f;
 }
+
+rsMatrix33 rsMatrix33::Adjoint() const
+{
+	rsMatrix33 matrix;
+
+	matrix.element[0] = element[4]*element[8] - element[5]*element[7];
+	matrix.element[1] = element[2]*element[7] - element[1]*element[8];
+	matrix.element[2] = element[1]*element[5] - element[2]*element[4];
+
+	matrix.element[3] = element[5]*element[6] - element[3]*element[8];
+	matrix.element[4] = element[0]*element[8] - element[2]*element[6];
+	matrix.element[5] = element[2]*element[3] - element[0]*element[5];
+
+	matrix.element[6] = element[3]*element[7] - element[4]*element[6];
+	matrix.element[7] = element[1]*element[6] - element[0]*element[7];
+	matrix.element[8] = element[0]*element[4] - element[1]*element[3];
+
+	return matrix; 
+}
+
+float rsMatrix33::Determinant() const
+{
+	return element[0] * (element[4]*element[8] - element[5]*element[7]) + 
+			element[3] * (element[2]*element[7] - element[1]*element[8]) + 
+			element[6] * (element[1]*element[5] - element[2]*element[4]); 
+}
+
+rsMatrix33& rsMatrix33::Inverse()
+{
+	return *this = ::Inverse(*this);
+}
+
+rsMatrix33 Inverse( const rsMatrix33& _matrix )
+{
+	rsMatrix33 matrix;
+	float determinant = _matrix.Determinant();
+	if(::IsZero( determinant ))
+    {
+        assert( false );
+        return matrix;
+    }
+
+	float invertDeterminant = 1.0f/determinant;
+	rsMatrix33 adjointMatrix = _matrix.Adjoint();
+
+	for(int i = 0; i < 9; i++)
+	{
+		matrix.element[i] = invertDeterminant * adjointMatrix.element[i];
+	}
+
+	return matrix;
+}
+
